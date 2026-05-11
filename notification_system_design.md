@@ -94,3 +94,95 @@ RESPONSE:
 
 # STAGE 2
 
+# Database Choice
+
+PostgreSQL
+
+## Reason for Choosing PostgreSQL
+
+- Supports structured relational data
+- Reliable ACID transactions
+- Efficient indexing for fast notification retrieval
+- Supports JSON fields if additional metadata is needed
+- Good scalability for large applications
+- Easy integration with REST APIs
+
+# SQL Schema
+
+```sql
+CREATE TABLE notifications (
+    id UUID PRIMARY KEY,
+    user_id UUID NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    priority VARCHAR(20) NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+# SQL Queries Based on APIs
+
+## 1. Create Notification
+
+```sql
+INSERT INTO notifications (
+    id,
+    user_id,
+    title,
+    message,
+    priority
+)
+VALUES (
+    gen_random_uuid(),
+    'user_0001',
+    'new alert',
+    'test notification',
+    'high'
+);
+```
+
+---
+
+# 2. Get Notifications
+
+```sql
+SELECT *
+FROM notifications
+WHERE user_id = 'user_0001'
+ORDER BY created_at DESC;
+```
+
+---
+
+# 3. Mark Notification as Read
+
+```sql
+UPDATE notifications
+SET is_read = TRUE,
+    updated_at = CURRENT_TIMESTAMP
+WHERE id = 'notification_id';
+```
+
+---
+
+# 4. Delete Notification
+
+```sql
+DELETE FROM notifications
+WHERE id = 'notification_id';
+```
+
+
+# System Architecture Overview
+
+Frontend Client
+↓
+REST API Server
+↓
+PostgreSQL Database
+↓
+Redis Cache
+↓
+WebSocket Server
