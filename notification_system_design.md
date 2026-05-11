@@ -92,6 +92,9 @@ RESPONSE:
   "message": "notification deleted successfully"
 }
 
+
+
+
 # STAGE 2
 
 # Database Choice
@@ -186,3 +189,33 @@ PostgreSQL Database
 Redis Cache
 ↓
 WebSocket Server
+
+
+
+
+# STAGE 3
+
+--- Existing Query ---
+
+```sql
+SELECT * FROM notifications
+WHERE user_id = 1024 AND isRead = false
+ORDER BY createdAt DESC;
+```
+
+--- OTIMISED QUERY ---
+
+```sql
+SELECT id, title, message, priority, created_at
+FROM notifications
+WHERE user_id = 1024
+AND is_read = false
+ORDER BY created_at DESC
+LIMIT 20 OFFSET 0;
+```
+
+
+
+
+# STAGE 4
+
