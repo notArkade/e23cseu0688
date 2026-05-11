@@ -1,0 +1,11 @@
+{
+  "name": "logging_middleware",
+  "version": "1.0.0",
+  "description": "sends structured logs to the test server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node example.js"
+  },
+  "keywords": ["logging", "middleware"],
+  "license": "ISC"
+}
