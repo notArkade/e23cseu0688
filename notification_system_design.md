@@ -219,3 +219,99 @@ LIMIT 20 OFFSET 0;
 
 # STAGE 4
 
+--- SOLUTION ---
+
+## 1. Pagination - fetching notifications in smaller batches.
+
+GET /notifications?page=1&limit=10
+
+## 2. Redis Caching
+
+stores unread counts
+stores recent notifications
+
+## 3. WebSocket Real-Time Notifications
+
+Push notifications directly instead of frequent polling.
+
+
+
+
+# STAGE 5
+
+## Improvede code (USING PYTHON)
+
+function notify_all(student_ids, message):
+
+    for student_id in student_ids:
+
+        publish_to_queue({
+            "student_id": student_id,
+            "message": message
+        })
+
+
+worker_process():
+
+    while queue_not_empty():
+
+        job = get_next_job()
+
+        parallel:
+            send_email(job.student_id, job.message)
+            save_to_db(job.student_id, job.message)
+            push_to_app(job.student_id, job.message)
+
+
+
+# STAGE 6
+
+## USING PYTHON
+
+class Notification:
+
+    def __init__(self, message, priority):
+        self.message = message
+        self.priority = priority
+
+
+class MaxHeap:
+
+    def __init__(self):
+        self.heap = []
+
+
+    def insert(self, notification):
+        push_heap(self.heap, notification)
+
+
+    def get_highest_priority(self):
+        return self.heap[0]
+
+
+    def remove_highest_priority(self):
+        pop_heap(self.heap)
+
+
+heap = MaxHeap()
+
+
+function process_notifications(notifications):
+
+    for n in notifications:
+
+        heap.insert(
+            Notification(
+                n["message"],
+                n["priority"]
+            )
+        )
+
+
+    top_notification = heap.get_highest_priority()
+
+    print(top_notification.message)
+
+
+
+
