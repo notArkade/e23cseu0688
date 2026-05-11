@@ -1,0 +1,44 @@
+﻿# dependencies
+/node_modules
+
+# production
+/dist
+
+# local env files
+.env
+.env.*
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vite cache
+/.vite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# npm package lock
+package-lock.json
+
+# optional npm cache
+.npm
+
+# build output
+/build
+
+# temporary files
+*.tmp
+*.temp

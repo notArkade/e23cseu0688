@@ -60,4 +60,37 @@ REQUEST:
   }
 }
 
-## MARK AS READ
+## MARK AS READ NOTIFICATIONS
+
+ENDPOINT:
+
+PATCH /notifications/{notificationId}/read
+
+REQUEST:
+
+{
+  "isRead": true
+}
+
+RESPONSE:
+
+{
+  "success": true,
+  "message": "notification marked as read"
+}
+
+## DELETE NOTIFICATIONS
+
+ENDPOINT:
+
+DELETE /notifications/{notificationId}
+
+RESPONSE:
+
+{
+  "success": true,
+  "message": "notification deleted successfully"
+}
+
+# STAGE 2
+
